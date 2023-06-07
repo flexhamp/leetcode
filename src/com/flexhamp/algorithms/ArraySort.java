@@ -4,12 +4,10 @@ package com.flexhamp.algorithms;
 import com.flexhamp.util.RunnableSort;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.function.IntFunction;
 
 public class ArraySort {
     private static int swap = 0;
@@ -23,6 +21,7 @@ public class ArraySort {
         list.add(ArraySort::bubbleSort);
         list.add(ArraySort::bubbleSort2);
         list.add(ArraySort::selectionSort);
+        list.add(ArraySort::insertionSort);
 
         list.forEach(runnableSort -> {
             execute(runnableSort, nums.clone());
@@ -97,21 +96,38 @@ public class ArraySort {
 
     /*
         Сортировка методом вставки
+        Выполняется за время порядка O(N^2)
 
+        Если данные упорядочены, то условие цикла while
+        никогда не бывает истинным; следовательно, оно вырождается в простую команду
+        во внешним цикле, выполняемую N–1 раз. В этом случае алгоритм выполняется
+        за время O(N).
 
+        Если данные почти отсортированы, то сортировка методом вставки
+        выполняется почти за время O(N), а следовательно, является простым и эффективным способом упорядочения файлов данных с небольшими отклонениями
+        в порядке сортировки.
     */
 
-//    public static void insertionSort(int[] nums) {
-//        for (int i,j = 1; i < nums.length; i++) {
-//
-//        }
-//    }
+    public static int[] insertionSort(int[] nums) {
+        int j;
+        for (int i = 1; i < nums.length; i++) {
+            int tmp = nums[i];
+            j = i;
+            while (j > 0 && nums[j - 1] >= tmp) {
+                nums[j] = nums[j - 1];
+                --j;
+            }
+            nums[j] = tmp;
+        }
 
-    private static void swap(int[] arr, int left, int reght) {
+        return nums;
+    }
+
+    private static void swap(int[] arr, int left, int right) {
         swap++;
         int tmp = arr[left];
-        arr[left] = arr[reght];
-        arr[reght] = tmp;
+        arr[left] = arr[right];
+        arr[right] = tmp;
     }
 
     private static int[] generateArray(int length, int from, int to) {
