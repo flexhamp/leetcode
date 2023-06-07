@@ -22,7 +22,7 @@ public class GuessNumberHigherOrLower {
     }
 
     public static int guessNumber(int n) {
-        int pick = n;
+        int pick = n / 2;
         int answwer = 1;
         while(answwer != 0) {
             pick += answwer = guess(pick);
