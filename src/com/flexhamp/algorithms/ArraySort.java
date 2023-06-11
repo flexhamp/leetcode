@@ -176,12 +176,25 @@ public class ArraySort {
         return nums;
     }
 
-
     private static void swap(int[] arr, int left, int right) {
         swap++;
         int tmp = arr[left];
         arr[left] = arr[right];
         arr[right] = tmp;
+    }
+
+    private static int[] generateArray() {
+        final int length = getRandom(15, 100);
+        return generateArray(length, 0, 1000);
+    }
+
+    private static int[] generateArray(int length) {
+        return generateArray(length, 0, 1000);
+    }
+
+    private static int[] generateArray(int from, int to) {
+        final int length = getRandom(15, 100);
+        return generateArray(length, from, to);
     }
 
     private static int[] generateArray(int length, int from, int to) {
@@ -191,20 +204,6 @@ public class ArraySort {
             array[i] = getRandom(from, to);
         }
         return array;
-    }
-
-    private static int[] generateArray(int from, int to) {
-        final int length = getRandom(15, 100);
-        return generateArray(length, from, to);
-    }
-
-    private static int[] generateArray(int length) {
-        return generateArray(length, 0, 1000);
-    }
-
-    private static int[] generateArray() {
-        final int length = getRandom(15, 100);
-        return generateArray(length, 0, 1000);
     }
 
     private static int getRandom(int from, int to) {
