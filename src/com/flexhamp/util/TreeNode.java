@@ -14,6 +14,7 @@ public class TreeNode {
     public TreeNode(int val, TreeNode left) {
         this.val = val;
         this.left = left;
+        right = null;
     }
 
     public TreeNode(int val, TreeNode left, TreeNode right) {
