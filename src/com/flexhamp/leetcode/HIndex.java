@@ -6,8 +6,9 @@ import java.util.Arrays;
 public class HIndex {
     public static void main(String[] args) {
         int[] m = new int[]{3, 0, 6, 1, 5};
-        System.out.println(hIndex(m));
+        System.out.println(hIndex3(m));
     }
+
     //https://www.youtube.com/watch?v=z2Y0S9SfzEs
     public static int hIndex(int[] citations) {
         if (citations == null || citations.length == 0) {
@@ -25,8 +26,6 @@ public class HIndex {
             }
         }
 
-        System.out.println(Arrays.toString(tmp));
-
         int pos = 0;
         for (int i = 0; i < n + 1; i++) {
             for (int j = 0; j < tmp[i]; j++) {
@@ -34,8 +33,6 @@ public class HIndex {
                 pos++;
             }
         }
-
-        System.out.println(Arrays.toString(citations));
 
         int h = 1;
         for (int i = n - 1; i >= 0; i--) {
@@ -46,5 +43,47 @@ public class HIndex {
         }
 
         return n;
+    }
+
+    public static int hIndex2(int[] citations) {
+        if (citations == null || citations.length == 0) {
+            return 0;
+        }
+
+        Arrays.sort(citations);
+
+        int h = 1;
+        for (int i = citations.length - 1; i >= 0; i--) {
+            if (citations[i] < h) {
+                return h - 1;
+            }
+            h++;
+        }
+
+        return citations.length;
+    }
+
+    public static int hIndex3(int[] citations) {
+        if (citations == null || citations.length == 0) {
+            return 0;
+        }
+        Arrays.sort(citations);
+
+        int left = 0, right = citations.length - 1, n = citations.length;
+        int h = 0;
+        int middle;
+
+        while (left <= right) {
+            middle = (left + right) / 2;
+            if (citations[middle] == n - middle) {
+                return citations[middle];
+            } else if (citations[middle] > n - middle) {
+                h = n - middle;
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return h;
     }
 }
