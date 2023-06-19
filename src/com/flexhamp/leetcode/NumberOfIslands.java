@@ -1,5 +1,6 @@
 package com.flexhamp.leetcode;
 
+//https://leetcode.com/problems/number-of-islands/description/
 public class NumberOfIslands {
     public static void main(String[] args) {
         System.out.println("1 = " + numIslands(new char[][]{
